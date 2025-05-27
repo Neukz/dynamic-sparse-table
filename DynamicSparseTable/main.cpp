@@ -7,7 +7,6 @@ int main() {
     scanf("%d", &testCount);
     scanf("%d %d", &min, &max);
     scanf("%d %d", &n, &k);
-    scanf("\n");
 
     Trie trie(n, k, min, max);
 
