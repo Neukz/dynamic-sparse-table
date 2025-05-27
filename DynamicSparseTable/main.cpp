@@ -1,28 +1,32 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include "Trie.h"
 
 int main() {
     int testCount, min, max, n, k;
-    std::cin >> testCount >> min >> max >> n >> k;
+    scanf("%d", &testCount);
+    scanf("%d %d", &min, &max);
+    scanf("%d %d", &n, &k);
+    scanf("\n");
+
+    Trie trie(n, k, min, max);
 
     char cmd;
     int x;
     for (int i = 0; i < testCount; i++) {
-        std::cin >> cmd;
+        scanf("%s %d", &cmd, &x);
         switch (cmd) {
             case 'I':
-                // Insert
-                std::cin >> x;
+                trie.insert(x);
                 break;
             case 'L':
-                // Lookup
-                std::cin >> x;
+                trie.lookup(x);
                 break;
             case 'D':
-                // Delete
-                std::cin >> x;
+                trie.remove(x);
                 break;
             case 'P':
-                // Print
+                trie.print();
                 break;
         }
     }
