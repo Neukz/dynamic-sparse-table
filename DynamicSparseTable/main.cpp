@@ -4,6 +4,7 @@
 
 int main() {
     int testCount, min, max, n, k;
+
     scanf("%d", &testCount);
     scanf("%d %d", &min, &max);
     scanf("%d %d", &n, &k);
@@ -13,7 +14,8 @@ int main() {
     char cmd;
     int x;
     for (int i = 0; i < testCount; i++) {
-        scanf("%s %d", &cmd, &x);
+        scanf(" %c %d", &cmd, &x);
+
         switch (cmd) {
             case 'I':
                 trie.insert(x);

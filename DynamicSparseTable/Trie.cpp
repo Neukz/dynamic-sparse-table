@@ -4,7 +4,7 @@
 #pragma region Private methods
 int Trie::getIndex(int depth, int key) const {
     if (depth == 0) {
-        return key % n;
+        return key % n; // Root level
     }
 
     int div = n;
@@ -22,11 +22,11 @@ bool Trie::nodeEmpty(Node* node) const {
 bool Trie::handleInsert(Node* node, int depth, int key) {
     if (nodeEmpty(node)) {
         node->key = key;
-        return true;
+        return true;    // Inserted
     }
     
     if (node->key == key) {
-        return false;
+        return false;   // Already exists
     }
 
     int size = (node == root) ? n : k;
@@ -44,15 +44,15 @@ bool Trie::handleInsert(Node* node, int depth, int key) {
 
 bool Trie::handleLookup(Node* node, int depth, int key) const {
     if (node == nullptr) {
-        return false;
+        return false;   // Does not exist
     }
 
     if (node->key == key) {
-        return true;
+        return true;    // Found
     }
 
     if (node->children == nullptr) {
-        return false;
+        return false;   // Does not exist (not equal to key and no children)
     }
 
     int index = getIndex(depth, key);
@@ -61,18 +61,19 @@ bool Trie::handleLookup(Node* node, int depth, int key) const {
 
 bool Trie::handleRemove(Node* node, int depth, int key) {
     if (node == nullptr) {
-        return false;
+        return false;   // Does not exist
     }
 
     if (node->key == key) {
+        // Find the leaf to swap with (may return the node itself)
         Node* leaf = findLeftmostLeaf(node);
         node->key = leaf->key;
         leaf->key = emptyKey;
-        return true;
+        return true;    // Deleted
     }
 
     if (node->children == nullptr) {
-        return false;
+        return false;   // Does not exist (not equal to key and no children)
     }
 
     int index = getIndex(depth, key);
@@ -106,11 +107,12 @@ Trie::Node* Trie::findLeftmostLeaf(Node* node) const {
         for (int i = 0; i < size; i++) {
             Node* leaf = findLeftmostLeaf(node->children[i]);
             if (leaf != nullptr) {
-                return leaf;
+                return leaf;    // Found non-empty leaf
             }
         }
     }
 
+    // Return the node that has no children and is not empty
     return nodeEmpty(node) ? nullptr : node;
 }
 

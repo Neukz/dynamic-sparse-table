@@ -17,7 +17,7 @@ private:
     Node* root;
     const int n, k;
     const int min, max;
-    const int emptyKey;
+    const int emptyKey; // Key to represent unoccupied node
 
     int getIndex(int depth, int key) const;
     bool nodeEmpty(Node* node) const;
